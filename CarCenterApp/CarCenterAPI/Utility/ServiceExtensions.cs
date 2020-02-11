@@ -16,11 +16,17 @@ namespace CarCenterApi.Utility
     {
         public static IServiceCollection RegistroServiciosNegocio(this IServiceCollection services)
         {
-            
+            //Repositorios
             services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
-            services.AddScoped<IClienteServicio, ClienteServicio>();
+            services.AddScoped<IRepuestoRepositorio, RepuestoRepositorio>();
+            services.AddScoped<IServicioRepositorio, ServicioRepositorio>();
+            services.AddScoped<IVehiculoRepositorio, VehiculoRepositorio>();
 
+            //Servicios
             services.AddScoped<IClienteServicio, ClienteServicio>();
+            services.AddScoped<IRepuestoServicio, RepuestoServicio>();
+            services.AddScoped<IServicioServicio, ServicioServicio>();
+            services.AddScoped<IVehiculoServicio, VehiculoServicio>();
 
             return services;
         }
