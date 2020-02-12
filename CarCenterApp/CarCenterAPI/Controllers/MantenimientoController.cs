@@ -1,42 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CarCenterAPI.Converts;
+﻿using CarCenterAPI.Converts;
 using CarCenterAPI.Models;
 using CarCenterCore.Servicios;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CarCenterAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class ClienteController : ControllerBase
+    public class MantenimientoController : ControllerBase
     {
-        private readonly IClienteServicio _clienteServicio;
+        private readonly IMantenimientoServicio _MantenimientoServicio;
 
-        public ClienteController(IClienteServicio clienteServicio)
+        public MantenimientoController(IMantenimientoServicio MantenimientoServicio)
         {
-            _clienteServicio = clienteServicio;
+            _MantenimientoServicio = MantenimientoServicio;
         }
 
         [HttpPost("Crear")]
-        public async Task<IActionResult> Crear([FromBody]ClienteModel model)
+        public async Task<IActionResult> Crear([FromBody]MantenimientoModel model)
         {
-            var cliente = await _clienteServicio.CrearCliente(ClienteConvert.toEntity(model));
-            if (cliente != null)
+            var Mantenimiento = await _MantenimientoServicio.CrearMantenimiento(MantenimientoConvert.toEntity(model));
+            if (Mantenimiento != null)
             {
-                return Ok(ClienteConvert.toClienteModel(cliente));
+                return Ok(MantenimientoConvert.toModel(Mantenimiento));
             }
             else
             {
                 ResponseModel response = new ResponseModel()
                 {
-                    Mensaje = "No se pudo crear el cliente",
+                    Mensaje = "No se pudo crear el Mantenimiento",
                     Estado = 200
                 };
                 return Ok(response);
@@ -47,15 +46,15 @@ namespace CarCenterAPI.Controllers
         public async Task<IActionResult> ObtenerPorId(string id)
         {
             var guid = Guid.Parse(id);
-            var cliente = await _clienteServicio.ObtenerClientePorId(guid);
-            if (cliente == null) { return NotFound(); } else { return Ok(ClienteConvert.toClienteModel(cliente)); }
+            var Mantenimiento = await _MantenimientoServicio.ObtenerMantenimientoPorId(guid);
+            if (Mantenimiento == null) { return NotFound(); } else { return Ok(MantenimientoConvert.toModel(Mantenimiento)); }
         }
 
         [HttpGet]
         public async Task<IActionResult> obtenerTodos()
         {
-            var resultado = await _clienteServicio.ObtenerClientes();
-            if (resultado.Count() >= 1) { return Ok(ClienteConvert.toListModel(resultado)); }
+            var resultado = await _MantenimientoServicio.ObtenerMantenimientos();
+            if (resultado.Count() >= 1) { return Ok(MantenimientoConvert.toListModel(resultado)); }
             else
             {
                 ResponseModel response = new ResponseModel()
@@ -68,19 +67,19 @@ namespace CarCenterAPI.Controllers
         }
 
         [HttpPut("actualizar")]
-        public async Task<IActionResult> actualizar([FromBody]ClienteModel modelo)
+        public async Task<IActionResult> actualizar([FromBody]MantenimientoModel modelo)
         {
-            var cliente = await _clienteServicio.ActualizarCliente(ClienteConvert.toEntity(modelo));
-            if (cliente != null)
+            var Mantenimiento = await _MantenimientoServicio.ActualizarMantenimiento(MantenimientoConvert.toEntity(modelo));
+            if (Mantenimiento != null)
             {
-                return Ok(ClienteConvert.toClienteModel(cliente));
+                return Ok(MantenimientoConvert.toModel(Mantenimiento));
             }
             else
             {
                 ResponseModel response = new ResponseModel()
                 {
                     Estado = 200,
-                    Mensaje = "No se pudo actualizar el cliente"
+                    Mensaje = "No se pudo actualizar el Mantenimiento"
                 };
                 return Ok(response);
             }
@@ -88,15 +87,15 @@ namespace CarCenterAPI.Controllers
 
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> eliminarCliente(string id)
+        public async Task<IActionResult> eliminarMantenimiento(string id)
         {
             var guid = Guid.Parse(id);
-            var resultado = await _clienteServicio.EliminarCliente(guid);
+            var resultado = await _MantenimientoServicio.EliminarMantenimiento(guid);
             if (resultado)
             {
                 ResponseModel response = new ResponseModel()
                 {
-                    Mensaje = "Cliente eliminado",
+                    Mensaje = "Mantenimiento eliminado",
                     Estado = 200
                 };
                 return Ok(response);
@@ -105,13 +104,11 @@ namespace CarCenterAPI.Controllers
             {
                 ResponseModel response = new ResponseModel()
                 {
-                    Mensaje = "Cliente no se pudo eliminar",
+                    Mensaje = "Mantenimiento no se pudo eliminar",
                     Estado = 200
                 };
                 return Ok(response);
             }
         }
-
-
     }
 }

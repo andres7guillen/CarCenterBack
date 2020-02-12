@@ -15,28 +15,28 @@ namespace CarCenterAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class ClienteController : ControllerBase
+    public class RepuestoController : ControllerBase
     {
-        private readonly IClienteServicio _clienteServicio;
+        private readonly IRepuestoServicio _RepuestoServicio;
 
-        public ClienteController(IClienteServicio clienteServicio)
+        public RepuestoController(IRepuestoServicio RepuestoServicio)
         {
-            _clienteServicio = clienteServicio;
+            _RepuestoServicio = RepuestoServicio;
         }
 
         [HttpPost("Crear")]
-        public async Task<IActionResult> Crear([FromBody]ClienteModel model)
+        public async Task<IActionResult> Crear([FromBody]RepuestoModel model)
         {
-            var cliente = await _clienteServicio.CrearCliente(ClienteConvert.toEntity(model));
-            if (cliente != null)
+            var Repuesto = await _RepuestoServicio.CrearRepuesto(RepuestoConvert.toEntity(model));
+            if (Repuesto != null)
             {
-                return Ok(ClienteConvert.toClienteModel(cliente));
+                return Ok(RepuestoConvert.toModel(Repuesto));
             }
             else
             {
                 ResponseModel response = new ResponseModel()
                 {
-                    Mensaje = "No se pudo crear el cliente",
+                    Mensaje = "No se pudo crear el Repuesto",
                     Estado = 200
                 };
                 return Ok(response);
@@ -47,15 +47,15 @@ namespace CarCenterAPI.Controllers
         public async Task<IActionResult> ObtenerPorId(string id)
         {
             var guid = Guid.Parse(id);
-            var cliente = await _clienteServicio.ObtenerClientePorId(guid);
-            if (cliente == null) { return NotFound(); } else { return Ok(ClienteConvert.toClienteModel(cliente)); }
+            var Repuesto = await _RepuestoServicio.ObtenerRepuestoPorId(guid);
+            if (Repuesto == null) { return NotFound(); } else { return Ok(RepuestoConvert.toModel(Repuesto)); }
         }
 
         [HttpGet]
         public async Task<IActionResult> obtenerTodos()
         {
-            var resultado = await _clienteServicio.ObtenerClientes();
-            if (resultado.Count() >= 1) { return Ok(ClienteConvert.toListModel(resultado)); }
+            var resultado = await _RepuestoServicio.ObtenerRepuestos();
+            if (resultado.Count() >= 1) { return Ok(RepuestoConvert.toListModel(resultado)); }
             else
             {
                 ResponseModel response = new ResponseModel()
@@ -68,19 +68,19 @@ namespace CarCenterAPI.Controllers
         }
 
         [HttpPut("actualizar")]
-        public async Task<IActionResult> actualizar([FromBody]ClienteModel modelo)
+        public async Task<IActionResult> actualizar([FromBody]RepuestoModel modelo)
         {
-            var cliente = await _clienteServicio.ActualizarCliente(ClienteConvert.toEntity(modelo));
-            if (cliente != null)
+            var Repuesto = await _RepuestoServicio.ActualizarRepuesto(RepuestoConvert.toEntity(modelo));
+            if (Repuesto != null)
             {
-                return Ok(ClienteConvert.toClienteModel(cliente));
+                return Ok(RepuestoConvert.toModel(Repuesto));
             }
             else
             {
                 ResponseModel response = new ResponseModel()
                 {
                     Estado = 200,
-                    Mensaje = "No se pudo actualizar el cliente"
+                    Mensaje = "No se pudo actualizar el Repuesto"
                 };
                 return Ok(response);
             }
@@ -88,15 +88,15 @@ namespace CarCenterAPI.Controllers
 
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> eliminarCliente(string id)
+        public async Task<IActionResult> eliminarRepuesto(string id)
         {
             var guid = Guid.Parse(id);
-            var resultado = await _clienteServicio.EliminarCliente(guid);
+            var resultado = await _RepuestoServicio.EliminarRepuesto(guid);
             if (resultado)
             {
                 ResponseModel response = new ResponseModel()
                 {
-                    Mensaje = "Cliente eliminado",
+                    Mensaje = "Repuesto eliminado",
                     Estado = 200
                 };
                 return Ok(response);
@@ -105,13 +105,11 @@ namespace CarCenterAPI.Controllers
             {
                 ResponseModel response = new ResponseModel()
                 {
-                    Mensaje = "Cliente no se pudo eliminar",
+                    Mensaje = "Repuesto no se pudo eliminar",
                     Estado = 200
                 };
                 return Ok(response);
             }
         }
-
-
     }
 }

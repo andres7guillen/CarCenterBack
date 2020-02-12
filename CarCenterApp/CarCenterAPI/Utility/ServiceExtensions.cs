@@ -21,12 +21,21 @@ namespace CarCenterApi.Utility
             services.AddScoped<IRepuestoRepositorio, RepuestoRepositorio>();
             services.AddScoped<IServicioRepositorio, ServicioRepositorio>();
             services.AddScoped<IVehiculoRepositorio, VehiculoRepositorio>();
+            services.AddScoped<IMantenimientoRepositorio, MantenimientoRepositorio>();
+            services.AddScoped<IMecanicoRepositorio, MecanicoRepositorio>();
+            services.AddScoped<IRepuestoRepositorio, RepuestoRepositorio>();
+            services.AddScoped<IFotoRepositorio, FotoRepositorio>();
 
             //Servicios
             services.AddScoped<IClienteServicio, ClienteServicio>();
             services.AddScoped<IRepuestoServicio, RepuestoServicio>();
             services.AddScoped<IServicioServicio, ServicioServicio>();
             services.AddScoped<IVehiculoServicio, VehiculoServicio>();
+
+            services.AddScoped<IMantenimientoServicio, MantenimientoServicio>();
+            services.AddScoped<IMecanicoServicio, MecanicoServicio>();
+            services.AddScoped<IRepuestoServicio, RepuestoServicio>();
+            services.AddScoped<IFotoServicio, FotoServicio>();
 
             return services;
         }

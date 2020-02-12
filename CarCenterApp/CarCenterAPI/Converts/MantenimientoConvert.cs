@@ -34,7 +34,7 @@ namespace CarCenterAPI.Converts
             output.Estado = input.Estado != null ? output.Estado = input.Estado : output.Estado = -1;
             output.Fecha = input.Fecha != null ? output.Fecha = input.Fecha : output.Fecha = new DateTime(0, 0, 0);
             output.Fotos = input.Fotos != null ? output.Fotos = FotoConvert.toListEntity(input.Fotos) : output.Fotos = new List<Foto>();
-            output.Id = input.Id != null ? output.Id = Guid.Parse(input.Id.ToString()) : output.Id = Guid.Empty;
+            //output.Id = input.Id != null ? output.Id = Guid.Parse(input.Id.ToString()) : output.Id = Guid.Empty;
             output.Mecanico = input.Mecanico != null ? output.Mecanico = MecanicoConvert.toEntity(input.Mecanico) : output.Mecanico = new Mecanico();
             output.MecanicoId = input.MecanicoId != null ? output.MecanicoId = Guid.Parse(input.MecanicoId.ToString()) : output.MecanicoId = Guid.Empty;
             output.Vehiculo = input.Vehiculo != null ? output.Vehiculo = VehiculoConvert.toEntity(input.Vehiculo) : output.Vehiculo = new Vehiculo();

@@ -1,6 +1,8 @@
 ﻿using CarCenterAPI.Converts;
 using CarCenterAPI.Models;
 using CarCenterCore.Servicios;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,7 @@ namespace CarCenterAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ServicioController : ControllerBase
     {
         private readonly IServicioServicio _ServicioServicio;

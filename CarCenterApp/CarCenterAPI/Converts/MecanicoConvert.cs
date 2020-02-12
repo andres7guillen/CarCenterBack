@@ -37,7 +37,7 @@ namespace CarCenterAPI.Converts
             output.Direccion = input.Direccion != null ? output.Direccion = input.Direccion : output.Direccion = "-o-";
             output.Documento = input.Documento != null ? output.Documento = input.Documento : output.Documento = "-o-";
             output.Email = input.Email != null ? output.Email = input.Email : output.Email = "-o-";
-            output.Id = input.Id != null ? output.Id = Guid.Parse(input.Id.ToString()) : output.Id = Guid.Empty;
+            //output.Id = input.Id != null ? output.Id = Guid.Parse(input.Id.ToString()) : output.Id = Guid.Empty;
             output.Mantenimientos = input.Mantenimientos != null ? output.Mantenimientos = MantenimientoConvert.toListEntity(input.Mantenimientos) : output.Mantenimientos = new List<Mantenimiento>();
             output.PrimerApellido = input.PrimerApellido != null ? output.PrimerApellido = input.PrimerApellido : output.PrimerApellido = "-o-";
             output.PrimerNombre = input.PrimerNombre != null ? output.PrimerNombre = input.PrimerNombre : output.PrimerNombre = "-o-";
