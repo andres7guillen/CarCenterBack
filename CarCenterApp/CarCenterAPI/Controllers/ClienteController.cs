@@ -51,7 +51,7 @@ namespace CarCenterAPI.Controllers
             if (cliente == null) { return NotFound(); } else { return Ok(ClienteConvert.toClienteModel(cliente)); }
         }
 
-        [HttpGet]
+        [HttpGet("obtenerTodos")]
         public async Task<IActionResult> obtenerTodos()
         {
             var resultado = await _clienteServicio.ObtenerClientes();
@@ -63,7 +63,7 @@ namespace CarCenterAPI.Controllers
                     Estado = 200,
                     Mensaje = "No hay registros!!"
                 };
-                return Ok(response);
+                return BadRequest(response);
             }
         }
 

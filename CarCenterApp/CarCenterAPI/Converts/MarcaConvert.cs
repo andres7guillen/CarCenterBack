@@ -26,7 +26,7 @@ namespace CarCenterAPI.Converts
         public static Marca toEntity(MarcaModel input)
         {
             Marca output = new Marca();
-            //output.Id = input.Id != null ? output.Id = Guid.Parse(input.Id.ToString()) : output.Id = Guid.Empty;
+            output.Id = input.Id != null ? output.Id = Guid.Parse(input.Id.ToString()) : output.Id = Guid.Empty;
             output.NombreMarca = input.NombreMarca != null ? output.NombreMarca = input.NombreMarca : output.NombreMarca = "-o-";
             output.Vehiculos = input.Vehiculos != null ? output.Vehiculos = VehiculoConvert.toListEntity(input.Vehiculos) : output.Vehiculos = new List<Vehiculo>();
             return output;

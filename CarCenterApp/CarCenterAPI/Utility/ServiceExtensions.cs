@@ -25,6 +25,7 @@ namespace CarCenterApi.Utility
             services.AddScoped<IMecanicoRepositorio, MecanicoRepositorio>();
             services.AddScoped<IRepuestoRepositorio, RepuestoRepositorio>();
             services.AddScoped<IFotoRepositorio, FotoRepositorio>();
+            services.AddScoped<IMarcaRepositorio, MarcaRepositorio>();
 
             //Servicios
             services.AddScoped<IClienteServicio, ClienteServicio>();
@@ -36,6 +37,7 @@ namespace CarCenterApi.Utility
             services.AddScoped<IMecanicoServicio, MecanicoServicio>();
             services.AddScoped<IRepuestoServicio, RepuestoServicio>();
             services.AddScoped<IFotoServicio, FotoServicio>();
+            services.AddScoped<IMarcaServicio, MarcaServicio>();
 
             return services;
         }

@@ -14,7 +14,7 @@ namespace CarCenterAPI.Converts
             ClienteModel output = new ClienteModel();
             output.Celular = input.Celular != null ?  output.Celular = input.Celular : output.Celular = "";
             output.Direccion = input.Direccion != null ? output.Direccion = input.Direccion : output.Direccion = "";
-            output.Documento = input.Documento != null ? output.Documento = input.Celular : output.Documento = "";
+            output.Documento = input.Documento != null ? output.Documento = input.Documento : output.Documento = "";
             output.Email = input.Email != null ? output.Email = input.Email : output.Email = "";
             output.Id = input.Id != null ? output.Id = input.Id.ToString() : output.Id = "";
             output.PresupuestoMaximo = input.PresupuestoMaximo != null ? output.PresupuestoMaximo = input.PresupuestoMaximo : output.PresupuestoMaximo = 0;
@@ -37,9 +37,9 @@ namespace CarCenterAPI.Converts
             Cliente output = new Cliente();
             output.Celular = input.Celular != null ? output.Celular = input.Celular : output.Celular = "";
             output.Direccion = input.Direccion != null ? output.Direccion = input.Direccion : output.Direccion = "";
-            output.Documento = input.Documento != null ? output.Documento = input.Celular : output.Documento = "";
+            output.Documento = input.Documento != null ? output.Documento = input.Documento : output.Documento = "";
             output.Email = input.Email != null ? output.Email = input.Email : output.Email = "";
-            //output.Id = input.Id != null ? output.Id = Guid.Parse(input.Id.ToString()) : output.Id = null;
+            output.Id = input.Id != null ? output.Id = Guid.Parse(input.Id.ToString()) : output.Id = Guid.NewGuid();
             output.PresupuestoMaximo = input.PresupuestoMaximo != null ? output.PresupuestoMaximo = input.PresupuestoMaximo : output.PresupuestoMaximo = 0;
             output.PrimerApellido = input.PrimerApellido != null ? output.PrimerApellido = input.PrimerApellido : output.PrimerApellido = "";
             output.PrimerNombre = input.PrimerNombre != null ? output.PrimerNombre = input.PrimerNombre : output.PrimerNombre = "";

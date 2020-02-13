@@ -62,7 +62,7 @@ namespace CarCenterAPI.Controllers
                     Estado = 200,
                     Mensaje = "No hay registros!!"
                 };
-                return Ok(response);
+                return BadRequest(response);
             }
         }
 
