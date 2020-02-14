@@ -4,6 +4,7 @@ using CarCenterData.Entidades.Negocio;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,6 +48,13 @@ namespace CarCenterInfrastructure.Repositorios
         public async Task<List<Mantenimiento>> ObtenerMantenimientos()
         {
             return await _context.Mantenimientos.ToListAsync();
+        }
+
+        public async Task<List<Mantenimiento>> ObtenerMantenimientosPorClienteId(Guid ClienteId)
+        {
+            return await _context.Mantenimientos
+                .Include(c => c.Mecanico)
+                .Where(m => m.Vehiculo.ClienteId == ClienteId).ToListAsync();
         }
     }
 }

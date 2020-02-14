@@ -13,5 +13,6 @@ namespace CarCenterCore.Repositorios
         Task<List<Mantenimiento>> ObtenerMantenimientos();
         Task<Mantenimiento> ActualizarMantenimiento(Mantenimiento modelo);
         Task<bool> EliminarMantenimiento(Guid MantenimientoId);
+        Task<List<Mantenimiento>> ObtenerMantenimientosPorClienteId(Guid ClienteId);
     }
 }

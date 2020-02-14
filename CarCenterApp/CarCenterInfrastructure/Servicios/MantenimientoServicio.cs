@@ -26,5 +26,7 @@ namespace CarCenterInfrastructure.Servicios
         public async Task<Mantenimiento> ObtenerMantenimientoPorId(Guid MantenimientoId) => await _repositorio.ObtenerMantenimientoPorId(MantenimientoId);
 
         public async Task<List<Mantenimiento>> ObtenerMantenimientos() => await _repositorio.ObtenerMantenimientos();
+
+        public async Task<List<Mantenimiento>> ObtenerMantenimientosPorClienteId(Guid ClienteId) => await _repositorio.ObtenerMantenimientosPorClienteId(ClienteId);
     }
 }
